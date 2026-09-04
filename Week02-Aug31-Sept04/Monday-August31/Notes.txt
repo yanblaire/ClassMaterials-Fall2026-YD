@@ -1,1 +1,202 @@
+// release 1
+//Vector3.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace VectorLibrary
+{
+    public struct Vector3
+    {
+        public double X;
+        public double Y;
+        public double Z;
+
+        public Vector3(double x, double y, double z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+    }
+}
+
+// end
+
+//VectorMath.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace VectorLibrary
+{
+    public static class VectorMath
+    {
+        public static Vector3 Add(Vector3 a, Vector3 b)
+        {
+            return new Vector3(
+                a.X + b.X,
+                a.Y + b.Y,
+                a.Z + b.Z
+            );
+        }
+
+        public static Vector3 Subtract(Vector3 a, Vector3 b)
+        {
+            return new Vector3(
+                a.X - b.X,
+                a.Y - b.Y,
+                a.Z - b.Z
+            );
+        }
+
+        public static Vector3 Scale(Vector3 a, double s)
+        {
+            return new Vector3(
+                a.X * s,
+                a.Y * s,
+                a.Z * s
+            );
+        }
+
+        public static double DotProduct(Vector3 a, Vector3 b)
+        {
+            return (a.X * b.X)
+                 + (a.Y * b.Y)
+                 + (a.Z * b.Z);
+        }
+
+        public static Vector3 CrossProduct(Vector3 a, Vector3 b)
+        {
+            return new Vector3(
+                a.Y * b.Z - a.Z * b.Y,
+                a.Z * b.X - a.X * b.Z,
+                a.X * b.Y - a.Y * b.X
+            );
+        }
+
+        public static double Magnitude(Vector3 a)
+        {
+            return Math.Sqrt(
+                a.X * a.X +
+                a.Y * a.Y +
+                a.Z * a.Z
+            );
+        }
+
+        public static Vector3 Normalize(Vector3 a)
+        {
+            double magnitude = Magnitude(a);
+
+            return new Vector3(
+                a.X / magnitude,
+                a.Y / magnitude,
+                a.Z / magnitude
+            );
+        }
+    }
+}
+
+// end
+
+// Program.cs
+
+using VectorLibrary;
+
+Console.WriteLine("Hello, Vectors!");
+
+Vector3 one = new Vector3(1, 1, 1);
+Vector3 two = new Vector3(2, 2, 2);
+Vector3 three = VectorMath.Add(one, two);
+
+Console.WriteLine(
+    "one.X: " + one.X +
+    ", one.Y: " + one.Y +
+    ", one.Z: " + one.Z
+);
+
+Console.WriteLine(
+    $"two.X: {two.X}, two.Y: {two.Y}, two.Z: {two.Z}"
+);
+
+Console.WriteLine(
+    $"<{three.X}, {three.Y}, {three.Z}>"
+);
+
+Console.WriteLine(
+    $"Magnitude of three: {VectorMath.Magnitude(three)}"
+);
+
+
+// end
+
+
+//release2
+// Vector3.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace VectorLibrary
+{
+    public class Vector3
+    {
+        private double _x;
+        private double _y;
+        private double _z;
+
+        public double X
+        {
+            get
+            {
+                return _x;
+            }
+
+            set
+            {
+                if (value == double.NaN)
+                    throw new ArgumentException("value must be a number");
+
+                _x = value;
+            }
+        }
+
+        public double Y { get; set; } = 0;
+
+        public double Z
+        {
+            get => _z;
+
+            set
+            {
+                if (value == double.NaN)
+                    return;
+
+                _z = value;
+            }
+        }
+
+        public Vector3(double x, double y, double z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+    }
+}
+
+// end
+
+//Program.cs
+
+
 
