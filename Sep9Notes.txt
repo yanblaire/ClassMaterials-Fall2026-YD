@@ -1,1 +1,56 @@
+//Student.cs
 
+namespace Enumeration {
+  public class Student {
+    private string _name;
+    private AcademicStatus _status;
+  }
+  public string Name {
+    get { return _name }
+    set {
+       if (!String.IsNullOrWhiteSpace(value)) {
+            _name= value;
+        }
+    }
+  }
+  pubic AcademicStatus Status {
+     get {return _status}
+      set {
+        _status = value
+      }
+  }
+  public Student(string name, AcademicStatus status){
+    Name = name;
+    Status = status;
+  }
+  public void DisplayInfo() {
+    Console.WriteLine("Student Name: {Name}");
+    Console.WriteLine("Student Status: {Status}");
+
+}
+
+//AcademicStatus Enumeration 
+// .cs file
+
+namespace Enumeration {
+  public enum AcademicStatus {
+    Pass, Fail, Incomplete
+  }
+}
+
+
+
+
+//Program.cs file
+
+using enumeration;
+
+Student student1 = new Student("Friday", AcademicStatus.Pass);
+
+student1.DisplayInfo();
+
+Console.WriteLine();
+
+student1.Status = AcademicStatus.Fail;
+
+student1.Status = "";
